@@ -13,11 +13,11 @@ export const FONTS_ROOT = resolvePath(
   `./${FONTS_DIRNAME}`,
 );
 
+let fontSettings;
 if (process.env.FONTS_SETTINGS) {
-  let fontSettings;
   try {
     /* eslint-disable global-require, import/no-dynamic-require */
-    fontSettings = require(process.env.FONTS_SETTINGS);
+    fontSettings = require(resolvePath(process.cwd(), process.env.FONTS_SETTINGS));
     /* eslint-enable */
   } catch (err) {
     throw new Error(`
@@ -33,9 +33,4 @@ if (process.env.FONTS_SETTINGS) {
   }
 }
 
-// TODO: Remove this log
-const ajv = new Ajv();
-const validate = ajv.compile(schema);
-console.log('Are the default settings valid?', validate(defaultSettings));
-
-export const FONTS_SETTINGS = process.env.FONTS_SETTINGS || defaultSettings;
+export const FONTS_SETTINGS = fontSettings || defaultSettings;
