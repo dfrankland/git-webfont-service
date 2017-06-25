@@ -1,0 +1,68 @@
+{
+  "name": "git-webfont-service",
+  "version": "1.0.0",
+  "description": "Serve fonts from a git repo.",
+  "engines": {
+    "node": ">=6"
+  },
+  "main": "dist/index.js",
+  "bin": "./dist/index.js",
+  "files": [
+    "dist/index.js"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "start": "node ./dist/index.js",
+    "predev": "npm run build",
+    "dev": "npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfrankland/git-webfont-service.git"
+  },
+  "keywords": [
+    "webfont",
+    "service",
+    "cdn"
+  ],
+  "author": "Dylan Frankland",
+  "contributors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfrankland/git-webfont-service/issues"
+  },
+  "homepage": "https://github.com/dfrankland/git-webfont-service#readme",
+  "dependencies": {
+    "ajv": "^5.2.0",
+    "cssnano": "4.0.0-rc.1",
+    "fs-extra": "^3.0.1",
+    "koa": "^2.3.0",
+    "koa-mount": "^3.0.0",
+    "koa-router": "^7.2.1",
+    "koa-static": "^3.0.0",
+    "lru-cache": "^4.1.1",
+    "qs": "^6.4.0",
+    "simple-git": "^1.73.0"
+  },
+  "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.5.2",
+    "babel-preset-stage-0": "^6.24.1",
+    "rollup": "^0.43.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
+      "stage-0"
+    ]
+  }
+}

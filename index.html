@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+  <head>
+    <title>git-webfont-service</title>
+    <link rel="stylesheet" href="http://localhost:3000/css?fonts[0][family]=FiraCode&fonts[0][weights][0]=300&fonts[0][weights][1]=500&fonts[0][weights][2]=700" />
+    <style>
+      * {
+        font-feature-settings: "calt" 1;  /* Enable ligatures for IE 10+, Edge */
+        text-rendering: optimizeLegibility; /* Force ligatures for Webkit, Blink, Gecko */
+        font-variant-ligatures: contextual; /* Enable ligatures for CodeMirror */
+        font-family: FiraCode, monospace;
+      }
+      pre {
+        background: #000;
+        color: #fff;
+        display: flex;
+        margin: 1rem 0;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+    <p>This is some regular text!</p>
+    <pre>
+      <code>
+echo "This is some code, but check out the ligatures below!";
+
+         .= .- := =:= __
+        == != === !== =/=
+
+<-< <<- <-- <- <-> -> --> ->> >->
+<=< <<= <==    <=> => ==> =>> >=>
+    >>= >>- >- <~> -< -<< =<<
+        <~~ <~ ~~ ~> ~~>
+
+     <<< << <= <>  >= >> >>>
+   <||| <|| <| <|> |> ||> |||>
+
+            <$ <$> $>
+            <+ <+> +>
+            <* <*> *>
+
+      \\ \\\  /* */  /// //
+      </ <!--  </>  --> />
+      0xF 9:45 m-x *ptr www
+
+       ;; :: ::: !! ?? %% &&
+      || .. ... ..< .? ?. ?:
+       -- --- ++ +++ ** ***
+
+          ~= ~- -~ ~@
+       ^= ?= /= /== |= ||=
+         #! ## ### ####
+      #{ #[ ]# #( #? #_ #_(
+
+
+a*b a*A B*b A*B *a *A a* A*
+a-b a-A B-b A-B -a -A a- A-
+a+b a+A B+b A+B +a +A a+ A+
+a:b a:A B:b A:B :a :A a: A:
+      </code>
+    </pre>
+  </body>
+</html>
