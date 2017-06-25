@@ -8,7 +8,7 @@ import { loadCache } from './fonts';
 
 const app = new Koa();
 const router = Router();
-// TODO: Update `koa-mount` when it updates its dependency on `koa-send` to
+// TODO: Update `koa-static` when it updates its dependency on `koa-send` to
 // version 4. That way we can use `brotli` compression. Currently, the option
 // below doesn't do anything.
 const serve = mount(`/${FONTS_DIRNAME}`, staticServe(FONTS_ROOT, { gzip: true, brotli: true }));
