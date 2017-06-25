@@ -2,6 +2,7 @@ import LruCache from 'lru-cache';
 import git from 'simple-git/promise';
 import { resolve as resolvePath } from 'path';
 import { remove as removeDir, ensureDir, writeFile } from 'fs-extra';
+import stringify from 'json-stable-stringify';
 import { MAX_AGE, FONTS_DIRNAME, FONTS_ROOT, FONTS_SETTINGS } from '../constants';
 import compress from '../lib/compress';
 
@@ -45,7 +46,7 @@ export const loadCache = async () => {
                       await compress(file, 'br'),
                     );
 
-                    const key = JSON.stringify({ family: fontName, weight });
+                    const key = stringify({ family: fontName, weight });
                     const oldUrls = cache.get(key) || {};
                     cache.set(
                       key,
@@ -66,5 +67,5 @@ export const loadCache = async () => {
 };
 
 export default ({ family, weight }) => (
-  cache.get(JSON.stringify({ family, weight }))
+  cache.get(stringify({ family, weight }))
 );

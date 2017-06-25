@@ -1,6 +1,7 @@
 import LruCache from 'lru-cache';
 import Ajv from 'ajv';
 import qs from 'qs';
+import stringify from 'json-stable-stringify';
 import cssnano from 'cssnano';
 import { MAX_AGE } from '../constants';
 import schema from './schema';
@@ -13,11 +14,10 @@ const ajv = new Ajv();
 const validate = ajv.compile(schema);
 
 export default async (querystring, encoding) => {
-  const key = JSON.stringify({ querystring, encoding });
+  const query = qs.parse(querystring);
+  const key = stringify({ query, encoding });
   const cachedResponse = cache.get(key);
   if (cachedResponse) return cachedResponse;
-
-  const query = qs.parse(querystring);
 
   if (!validate(query)) throw new Error('/* Font query was invalid! */');
 
