@@ -17,9 +17,9 @@ export const loadCache = async () => {
       async fontName => {
         // Make directories for all specified fonts
         const fontPath = resolvePath(FONTS_ROOT, fontName);
-        const repoPath = resolvePath(fontPath, './repo');
+        const repoPath = resolvePath(fontPath, './.git');
         await ensureDir(repoPath);
-        await git(repoPath).clone(FONTS_SETTINGS[fontName].url, repoPath);
+        await git(fontPath).clone(FONTS_SETTINGS[fontName].url, repoPath, ['--bare']);
 
         await Promise.all(
           Object.keys(FONTS_SETTINGS[fontName].weights).map(
@@ -30,7 +30,7 @@ export const loadCache = async () => {
                     const repoPathToFile = FONTS_SETTINGS[fontName].weights[weight][format];
                     const fileName = `${weight}.${format}`;
 
-                    const file = await git(repoPath).binaryCatFile([
+                    const file = await git(fontPath).binaryCatFile([
                       '-p',
                       `HEAD:${repoPathToFile}`,
                     ]);
