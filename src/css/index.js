@@ -2,23 +2,15 @@ import LruCache from 'lru-cache';
 import Ajv from 'ajv';
 import qs from 'qs';
 import cssnano from 'cssnano';
-import { gzip } from 'zlib';
 import { MAX_AGE } from '../constants';
 import schema from './schema';
 import template from './template';
 import fonts from '../fonts';
+import compress from '../lib/compress';
 
 const cache = new LruCache({ maxAge: MAX_AGE, stale: true });
 const ajv = new Ajv();
 const validate = ajv.compile(schema);
-
-const compress = string => (
-  new Promise(
-    (resolve, reject) => (
-      gzip(Buffer.from(string), (err, result) => (err ? reject(err) : resolve(result)))
-    ),
-  )
-);
 
 export default async (querystring) => {
   const cachedResponse = cache.get(querystring);
