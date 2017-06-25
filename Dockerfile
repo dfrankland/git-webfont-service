@@ -1,6 +1,6 @@
 FROM node
 
-LABEL name "git-webfont-service"
+LABEL name git-webfont-service
 
 # Change working directory
 WORKDIR /usr/src/app
