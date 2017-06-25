@@ -36,7 +36,14 @@ export const loadCache = async () => {
                     ]);
 
                     await writeFile(resolvePath(fontPath, fileName), file);
-                    await writeFile(resolvePath(fontPath, `${fileName}.gz`), await compress(file));
+                    await writeFile(
+                      resolvePath(fontPath, `${fileName}.gz`),
+                      await compress(file, 'gzip'),
+                    );
+                    await writeFile(
+                      resolvePath(fontPath, `${fileName}.br`),
+                      await compress(file, 'br'),
+                    );
 
                     const key = JSON.stringify({ family: fontName, weight });
                     const oldUrls = cache.get(key) || {};

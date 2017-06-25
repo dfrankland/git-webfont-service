@@ -12,8 +12,9 @@ const cache = new LruCache({ maxAge: MAX_AGE, stale: true });
 const ajv = new Ajv();
 const validate = ajv.compile(schema);
 
-export default async (querystring) => {
-  const cachedResponse = cache.get(querystring);
+export default async (querystring, encoding) => {
+  const key = JSON.stringify({ querystring, encoding });
+  const cachedResponse = cache.get(key);
   if (cachedResponse) return cachedResponse;
 
   const query = qs.parse(querystring);
@@ -51,8 +52,9 @@ export default async (querystring) => {
       (
         await cssnano.process(css, {}, { discardUnused: { fontFace: false } })
       ).css,
+      encoding,
     );
-    cache.set(querystring, response);
+    cache.set(key, response);
     return response;
   } catch (err) {
     throw new Error('/* Could not optimize CSS! */');
